@@ -77,7 +77,7 @@ mod_dashboard_server <- function(id, data) {
       
       
       # --- Apply Type filter ---
-      if ("type" %in% names(df) && length(input$facility_select) > 0) {
+      if ("type" %in% names(df) && !is.null(input$facility_select)) {
         df$type <- trimws(as.character(df$type))   # ensure character
         df <- df[df$type %in% input$facility_select, ]
         df$type <- droplevels(factor(df$type))     # drop unused levels
@@ -88,10 +88,11 @@ mod_dashboard_server <- function(id, data) {
       # --- Apply Date filter ---
       if ("date" %in% names(df) && !is.null(input$date_range)) {
         req(input$date_range)
-        df$date <- as.Date(lubridate::parse_date_time(
-          df$date, orders = c("ymd", "dmy", "mdy")
-        ))
+        # df$date <- as.Date(lubridate::parse_date_time(
+        #   df$date, orders = c("ymd", "dmy", "mdy")
+        # ))
         df <- df[df$date >= input$date_range[1] & df$date <= input$date_range[2], ]
+        req(nrow(df) > 0)
       }
       
       df
@@ -100,6 +101,9 @@ mod_dashboard_server <- function(id, data) {
     # 3. KPIs (calculated on filtered data)
     output$total_consumption <- renderText({
       df <- filtered_data()
+      validate(
+    need("value" %in% names(df), "No value column available in data")
+      )
       print(paste("Rows in KPI calc:", nrow(df)))
       print(unique(df$type))
       
