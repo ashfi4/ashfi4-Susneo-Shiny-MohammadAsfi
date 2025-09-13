@@ -42,7 +42,11 @@ jobs:
 
       - name: Install dependencies
         run: |
+<<<<<<< HEAD
           R -e 'install.packages(c("shiny", "testthat", "ggplot2", "lubridate","dplyr","viridis"))'
+=======
+          R -e 'install.packages(c("shiny", "testthat", "ggplot2", "lubridate","dplyr","viridis")'
+>>>>>>> b63a7e4a4ad63fc3cd87d2e5e466869a3821a412
       - name: List repo files
         run: ls -R
       # - name: Run tests
