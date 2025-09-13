@@ -44,7 +44,7 @@ jobs:
         run: ls -R
       - name: Run tests
         run: |
-          R -e 'testthat::test_dir('Test/test-app.R')'
+          Rscript -e 'testthat::test_dir('Test/test-app.R')'
       - name: Check app.R runs without error
         run: |
-          R -e 'source("app.R"); message("app.R loaded successfully")
+          Rscript -e 'source("app.R"); message("app.R loaded successfully")
