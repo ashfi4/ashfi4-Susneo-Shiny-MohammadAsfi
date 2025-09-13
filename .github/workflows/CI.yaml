@@ -42,9 +42,9 @@ jobs:
           R -e 'install.packages(c("shiny", "testthat", "ggplot2", "lubridate"))'
       - name: List repo files
         run: ls -R
-      # - name: Run tests
-      #   run: |
-      #     R -e 'testthat::test_dir("Test/test-app.R")'
-      # - name: Check app.R runs without error
+      - name: Run tests
+        run: |
+          R -e 'testthat::test_dir('Test/test-app.R')'
+      - name: Check app.R runs without error
         run: |
           R -e 'source("app.R"); message("app.R loaded successfully")
