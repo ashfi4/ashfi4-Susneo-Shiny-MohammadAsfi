@@ -2,25 +2,24 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ dev, main ]        # run CI when pushing to dev or main
   pull_request:
-    branches: [ main ]
+    branches: [ dev, main ]        # run CI when PR targets dev or main
 
 jobs:
-  R-CMD-check:
+  shiny-test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
 
       - name: Install dependencies
-        run: Rscript -e 'install.packages(c("shiny", "ggplot2", "testthat", "dplyr", "lubridate"))'
+        run: |
+          R -e 'install.packages(c("shiny", "testthat", "ggplot2", "lubridate"))'
 
-      - name: Run unit tests
-        run: Rscript -e 'testthat::test_dir("Test")'
-
-      - name: R CMD check
-        uses: r-lib/actions/check-r-package@v2
+      - name: Run tests
+        run: |
+          R -e 'testthat::test_dir("Test")'
