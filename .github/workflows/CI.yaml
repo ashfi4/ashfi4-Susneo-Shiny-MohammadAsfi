@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ dev, main ]        # run CI when pushing to dev or main
+    branches: [ dev ]        # run CI when pushing to dev or main
   pull_request:
-    branches: [ dev, main ]        # run CI when PR targets dev or main
+    branches: [ dev ]        # run CI when PR targets dev or main
 
 jobs:
   shiny-test:
