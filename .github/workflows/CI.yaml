@@ -19,7 +19,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          R -e 'install.packages(c("shiny", "testthat", "ggplot2", "lubridate","dplyr"))'
+          R -e 'install.packages(c("shiny", "testthat", "ggplot2", "lubridate","dplyr","viridis"))'
       - name: List repo files
         run: ls -R
       # - name: Run tests
