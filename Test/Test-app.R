@@ -1,5 +1,4 @@
 library(testthat)
-
 # ---- 1. Test CSV columns ----
 test_that("Uploaded CSV has required columns", {
   df <- data.frame(
