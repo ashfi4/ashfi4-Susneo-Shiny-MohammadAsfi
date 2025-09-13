@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  R-CMD-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+
+      - name: Install dependencies
+        run: Rscript -e 'install.packages(c("shiny", "ggplot2", "testthat", "dplyr", "lubridate"))'
+
+      - name: Run unit tests
+        run: Rscript -e 'testthat::test_dir("Test")'
+
+      - name: R CMD check
+        uses: r-lib/actions/check-r-package@v2
