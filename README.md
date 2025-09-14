@@ -15,7 +15,7 @@ shiny::runApp("app.R")
 
 - Bash commands render in a **bash block**.  
 - R commands render in **R blocks**.  
-- Everything looks clean and clear in GitHub.
+
 
 **2. App Overview**
 
